@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import ContactsList from "./ContactsList";
-import { Form } from "./Contacts/ContactsForm";
-import Title from './Title/Title'
 import { nanoid } from "nanoid";
+
+import ContactsList from "./ContactsList";
+import Form from "./Contacts/ContactsForm";
 import Filter from "./Filter";
+import Section from "./Section/Section";
 
 export class App extends Component {
   state = {
@@ -49,11 +50,13 @@ export class App extends Component {
     const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter));
     return (
       <>
-        <Title title='Phonebook' />
-        <Form onSubmit={onFormSubmit} />
-        <Title title='Contacts' />
-        <Filter onChangeFilter={onChangeFilter} value={filter} />
-        <ContactsList contacts={visibleContacts} onDelete={deleteContact} />
+        <Section title='Phonebook' >
+          <Form onSubmit={onFormSubmit} />
+        </Section>
+        <Section title='Contacts' >
+          <Filter onChangeFilter={onChangeFilter} value={filter} />
+          <ContactsList contacts={visibleContacts} onDelete={deleteContact} />
+        </Section>
       </>
     )
   }

@@ -1,8 +1,7 @@
-
 import { nanoid } from "nanoid";
 import React, { Component } from "react";
 
-export class Form extends Component {
+export default class Form extends Component {
     state = {
         name: '',
         number: ''
