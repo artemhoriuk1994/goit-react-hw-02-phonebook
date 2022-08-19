@@ -32,7 +32,7 @@ const Input = styled(Field)`
 export const Forms = ({ onSubmit }) => {
     const schem = yup.object().shape({
         name: yup.string().required(),
-        number: yup.string().min(13, 'Too short!').max(13, "Too long!")
+        number: yup.string().min(13, 'Too short!').max(13, "Too long!").required()
     })
     const handleSubmit = (values, { resetForm }) => {
         onSubmit(values);
