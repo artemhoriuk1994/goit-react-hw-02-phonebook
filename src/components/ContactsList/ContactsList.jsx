@@ -1,11 +1,18 @@
+import Btn from 'components/Button/Button';
 import PropTypes from 'prop-types'
+import { ContactItem } from './ContactsList.styled';
+import { Box } from 'components/box';
+
+
 const ContactsList = ({ contacts, onDelete }) => {
     return (
-        <ul>{contacts.map(contact => (
-            <li key={contact.id}>{contact.name}: {contact.number}
-                <button type='button' onClick={() => onDelete(contact.id)}>Delete</button>
-            </li>
-        ))}</ul>
+        <Box as="ul" display="flex" flexDirection="column" gridGap={4}>{contacts.map(contact => (
+            <ContactItem key={contact.id}>{contact.name}: {contact.number}
+                <Btn name='DeleteBTN' onClick={() => onDelete(contact.id)}>
+                    Delete
+                </Btn>
+            </ContactItem>
+        ))}</Box>
     )
 }
 

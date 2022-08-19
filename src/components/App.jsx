@@ -2,18 +2,25 @@ import React, { Component } from "react";
 import { nanoid } from "nanoid";
 
 import ContactsList from "./ContactsList";
-import Form from "./Contacts/ContactsForm";
+import { Forms } from "./Contacts/ContactsForm";
 import Filter from "./Filter";
 import Section from "./Section/Section";
 
+import { Container } from "./App.styled";
+import { GlobalStyles } from "./GlobabalStyles";
+
+
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [{ id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },],
     filter: ''
   };
 
-  onChangeFilter = (e) => {
-    this.setState({ filter: e.currentTarget.value })
+  onChangeFilter = (input) => {
+    this.setState({ filter: input })
   }
 
   onFormSubmit = data => {
@@ -50,13 +57,19 @@ export class App extends Component {
     const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter));
     return (
       <>
-        <Section title='Phonebook' >
-          <Form onSubmit={onFormSubmit} />
-        </Section>
-        <Section title='Contacts' >
-          <Filter onChangeFilter={onChangeFilter} value={filter} />
-          <ContactsList contacts={visibleContacts} onDelete={deleteContact} />
-        </Section>
+        <Container>
+          <Section title='Phonebook' >
+            <Forms onSubmit={onFormSubmit} />
+          </Section>
+        </Container>
+        <Container>
+          <Section title='Contacts' >
+            <Filter onChangeFilter={onChangeFilter} filter={filter} />
+            {contacts.length > 0 ? <ContactsList contacts={visibleContacts} onDelete={deleteContact} /> : <p>Your phone book is empty</p>}
+
+          </Section>
+        </Container>
+        <GlobalStyles />
       </>
     )
   }
